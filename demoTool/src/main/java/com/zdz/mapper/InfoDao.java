@@ -12,5 +12,5 @@ import java.util.List;
 //@Component
 public interface InfoDao extends JpaRepository<Info, Long> {
     List<Info> findAllByIdGreaterThan(Long id);
-
+    List<Info> findByIdIn(List<Long> list);
 }

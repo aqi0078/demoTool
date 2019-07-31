@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("info2Service")
 public class InfoServiceImpl implements InfoService {
 
     @Autowired
@@ -27,5 +28,17 @@ public class InfoServiceImpl implements InfoService {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).getId()+"==list==="+list.get(i).getName());
         }
+        List<Long> listId=new ArrayList();
+        listId.add(1L);
+        listId.add(2L);
+        listId.add(3L);
+
+        List<Info> listData=infodao.findByIdIn(listId);
+        for (int i = 0; i < listData.size(); i++) {
+            System.out.println(listData.get(i).getId()+"==listData==="+listData.get(i).getName());
+        }
+
+
+
     }
 }
