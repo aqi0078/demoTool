@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.Setter;
 import lombok.Getter;
+
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "info")
@@ -17,6 +20,8 @@ public class Info {
     private Long id;
     @Column(name = "name")
     private String name;
+    @Column(name = "date_time")
+    private Date dateTime;
 
 
 }

@@ -13,8 +13,8 @@ public class Data {
     public static class Tmp{
 
         static Map<String,Map<Integer,List<Long>>> data=new HashMap<>();
-        static Long TIME=1000L;
-        public Tmp(){
+        static Long TIME=100000L;
+        static{
 
             List<Map<String,Object>> list=new ArrayList<>();
             Map<String,Object> map710=new HashMap<>();
@@ -30,12 +30,12 @@ public class Data {
             list.add(map790);
 
             Map<String,Object> map990=new HashMap<>();
-            map990.put("time","13:00|12:00");
+            map990.put("time","13:00|16:06");
             map990.put("account",60);
             map990.put("fundingPrty",790L);
             list.add(map990);
-
             thData(list);
+            System.out.println("7890------");
         }
 
         /**
@@ -47,7 +47,6 @@ public class Data {
             for (int i = 0; i < list.size(); i++) {
                 Map<String,Object> map=list.get(i);
                 String[] str=map.get("time").toString().split("\\|");
-                System.out.println("===getdata==---"+str[0]);
                 for (int j = 0; j < str.length; j++) {
                     if (timeMap.get(str[j])==null) {
                         List<Map<String,Object>> listTmp=new ArrayList<>();
@@ -88,7 +87,7 @@ public class Data {
          * 返回1秒内需要执行的账户：资金方
          * @return
          */
-        public Map<Integer,List<Long>> getData(){
+        public static Map<Integer,List<Long>> getData(){
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
             for (String str:data.keySet()){
                 try {
@@ -109,7 +108,10 @@ public class Data {
 
 
     public static void main(String[] args) {
-        Tmp tmp=new Tmp();
-        System.out.println(tmp.getData());
+       // Tmp tmp=new Tmp();
+
+        System.out.println(Tmp.getData());
+
+        System.out.println(Tmp.data);
     }
 }

@@ -30,20 +30,20 @@ public class HelloController {
        // infoService.printData();
         for (String str:map.keySet()) {
             map.get(str).printData();
-
+            System.out.println("========="+map.get(str).getloanMerchantId());
         }
-        try {
-            Class<?> c = Class.forName("com.zdz.service.impl."+"Info1"+"ServiceImpl");
-            InfoService in=(InfoService)c.newInstance();
-            System.out.println("--------");
-            in.printData();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Class<?> c = Class.forName("com.zdz.service.impl."+"Info2"+"ServiceImpl");
+//            InfoService in=(InfoService)c.newInstance();
+//            System.out.println("--------");
+//            in.printData();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        }
 
         // infoService.printData();
         return "hello----";
