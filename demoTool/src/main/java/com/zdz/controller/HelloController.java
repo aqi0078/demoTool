@@ -5,6 +5,7 @@ import com.zdz.bean.DataEnum;
 import com.zdz.bean.Info;
 import com.zdz.mapper.InfoDao;
 import com.zdz.service.InfoService;
+import com.zdz.test.FundCompensatoryJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,14 +25,17 @@ public class HelloController {
 //    InfoService infoService;
 
     @Autowired
+    FundCompensatoryJobService fundCompensatoryJobService;
+    @Autowired
     Map<String,InfoService> map;
     @RequestMapping("/hello")
     public String hello(){
+        fundCompensatoryJobService.execute();
        // infoService.printData();
-        for (String str:map.keySet()) {
-            map.get(str).printData();
-            System.out.println("========="+map.get(str).getloanMerchantId());
-        }
+//        for (String str:map.keySet()) {
+//            map.get(str).printData();
+//            System.out.println("========="+map.get(str).getloanMerchantId());
+//        }
 //        try {
 //            Class<?> c = Class.forName("com.zdz.service.impl."+"Info2"+"ServiceImpl");
 //            InfoService in=(InfoService)c.newInstance();
