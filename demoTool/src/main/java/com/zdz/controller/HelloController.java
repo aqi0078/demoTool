@@ -1,17 +1,18 @@
 package com.zdz.controller;
 
-import com.zdz.bean.Data;
-import com.zdz.bean.DataEnum;
-import com.zdz.bean.Info;
+import com.zdz.bean.*;
 import com.zdz.mapper.InfoDao;
+import com.zdz.service.AService;
 import com.zdz.service.InfoService;
+import com.zdz.service.PayOrderService;
+import com.zdz.service.impl.PService;
 import com.zdz.test.FundCompensatoryJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,21 +22,86 @@ import java.util.Set;
 //@EnableAutoConfiguration
 public class HelloController {
 
-//    @Autowired
-//    InfoService infoService;
+    @Autowired
+    PayOrderService payOrderServiceImpl;
 
+    @Autowired
+    @Qualifier("infoService")
+    InfoService infoService;
     @Autowired
     FundCompensatoryJobService fundCompensatoryJobService;
     @Autowired
     Map<String,InfoService> map;
+
+//    @Autowired
+//    AService aServiceImpl;
+    @Autowired
+    Map<String, PService> pService;
+    @RequestMapping("/serMap")
+    public String ser(){
+        System.out.println("=========");
+        LocalDate d = LocalDate.now();
+        d.plusDays(-1);
+
+
+
+        try {
+            System.out.println(payOrderServiceImpl.createSimplePayOrder("",null,null,null,null));
+//            System.out.println(payOrderService.createSimplePayOrder("",null,null,null,null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("=========");
+        String str="00---";
+        System.out.println(pService.get("aService").getP());
+        System.out.println(pService.get("bService").getP());
+        System.out.println(pService.get("cService").getP());
+//        System.out.println(aServiceImpl.getA());
+        return str;
+    }
+//    @ModelAttribute("alarmReq")
+//    public BolgRequst getMessageAlarmReq() {
+//        System.out.println("=================");
+//
+//        return new BolgRequst();
+//    }
+//
+//    @RequestMapping("/blog")
+//    public BlogResponse blog(@ModelAttribute("alarmReq")BolgRequst bolgRequst){
+//        System.out.println("========="+bolgRequst);
+//        BlogResponse blogResponse=new BlogResponse();
+//        blogResponse.setErrorCode("11");
+//        blogResponse.setErrorMsg("22");
+//        blogResponse.setMerchantno("33");
+//        return blogResponse;
+//    }
+    @RequestMapping("/blog2")
+    public BlogResponse blog2(BolgRequst bolgRequst){
+        System.out.println("========="+bolgRequst);
+        BlogResponse blogResponse=new BlogResponse();
+        blogResponse.setErrorCode("11");
+        blogResponse.setErrorMsg("22");
+        blogResponse.setMerchantno("33");
+        return blogResponse;
+    }
+    @RequestMapping(value ="/blog1")//,method = RequestMethod.POST
+    public BlogResponse blog1(@RequestBody BolgRequst bolgRequst){
+        System.out.println("========="+bolgRequst);
+        BlogResponse blogResponse=new BlogResponse();
+        blogResponse.setErrorCode("11");
+        blogResponse.setErrorMsg("22");
+        blogResponse.setMerchantno("33");
+        return blogResponse;
+    }
+
     @RequestMapping("/hello")
     public String hello(){
-        fundCompensatoryJobService.execute();
+//        fundCompensatoryJobService.execute();
        // infoService.printData();
-//        for (String str:map.keySet()) {
-//            map.get(str).printData();
-//            System.out.println("========="+map.get(str).getloanMerchantId());
-//        }
+        for (String str:map.keySet()) {
+            map.get(str).printData();
+            System.out.println("========="+map.get(str).getloanMerchantId());
+        }
 //        try {
 //            Class<?> c = Class.forName("com.zdz.service.impl."+"Info2"+"ServiceImpl");
 //            InfoService in=(InfoService)c.newInstance();

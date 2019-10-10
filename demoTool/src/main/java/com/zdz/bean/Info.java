@@ -10,18 +10,19 @@ import lombok.Data;
 import lombok.Setter;
 import lombok.Getter;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "info")
-public class Info {
+public  class Info {
     @Id
     private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "date_time")
-    private Date dateTime;
+    private Timestamp dateTime;
 
 
 }
